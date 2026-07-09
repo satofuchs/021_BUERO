@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>021_BUERO</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: Neue Haas Grotesk, Helvetica, sans-serif;
+      color: white;
+      overflow: hidden;
+      background: black;
+    }
+
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .background img,
+    .background video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.75);
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .title {
+      font-size: clamp(42px, 9vw, 140px);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .description {
+      position: absolute;
+      max-width: 620px;
+      font-size: clamp(16px, 2vw, 22px);
+      line-height: 1.35;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      padding: 24px;
+    }
+
+    .description.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+ 
+.members {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  font-size: 13px;
+  letter-spacing: 0.03em;
+}
+
+.members a {
+  color: white;
+  text-decoration: none;
+}
+
+.members a:nth-child(1) {
+  text-align: left;
+}
+
+.members a:nth-child(2),
+.members a:nth-child(3) {
+  text-align: center;
+}
+
+.members a:nth-child(4) {
+  text-align: right;
+}
+
+.members a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.members a:hover {
+    color: white;
+}
+
+    .title.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+.email {
+  display: inline-block;
+  margin-top: 18px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.email:hover {
+  text-decoration: underline;
+}
+
+    @media (max-width: 700px) {
+      .emails {
+        flex-direction: column;
+        align-items: center;
+        bottom: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="background" id="background"></div>
+
+  <main class="page">
+    <h1 class="title" id="title">021_BUERO</h1>
+
+    <div class="description" id="description">
+      <p>
+        021_BUERO inquires the conditions of living together.
+      </p>
+      <br>
+      <p>
+        The collective of similar minds plays on transdisplinary fields of action. It balances conception, reflection & operation within spatial practices, text, image & hospitality.
+      </p>
+      
+        <br>
+        
+<div class="members">
+    <a href="https://www.instagram.com/dariogemperle/"
+   target="_blank"
+   rel="noopener noreferrer">
+   Dario Gemperle
+</a>
+    <a href="https://www.instagram.com/maneyya/"
+   target="_blank"
+   rel="noopener noreferrer">
+   Majella Hauri
+</a>
+    <a href="https://www.instagram.com/robingemperle/"
+   target="_blank"
+   rel="noopener noreferrer">
+   Robin Gemperle
+</a>
+    <a href="https://www.instagram.com/satofuchs/"
+   target="_blank"
+   rel="noopener noreferrer">
+   Samuel Fuchs
+</a>
+</div>
+
+<br>
+
+<a class="email" href="mailto:office@021buero.ch">
+  office@021buero.ch
+</a>
+         <br>
+    
+    </div>
+  </main>
+
+  <script>
+  
+  const backgrounds = [
+    { type: "image", src: "media/image1.jpg" },
+    { type: "image", src: "media/image2.jpg" },
+    { type: "image", src: "media/image3.jpg" },
+    { type: "image", src: "media/image4.jpg" },
+    { type: "image", src: "media/image5.jpg" },
+    { type: "image", src: "media/image6.jpg" },
+    { type: "image", src: "media/image7.jpg" },
+];
+
+const random = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+
+const background = document.getElementById("background");
+
+if (random.type === "image") {
+
+    background.innerHTML = `
+        <img src="${random.src}" alt="">
+    `;
+
+} else {
+
+    background.innerHTML = `
+        <video autoplay muted loop playsinline>
+            <source src="${random.src}" type="video/mp4">
+        </video>
+    `;
+
+}
+  
+const title = document.getElementById("title");
+const description = document.getElementById("description");
+const members = document.getElementById("members");
+
+title.addEventListener("click", () => {
+  title.classList.add("hidden");
+  description.classList.add("visible");
+  members.classList.add("visible");
+});
+
+description.addEventListener("click", (event) => {
+  if (event.target.closest("a")) return;
+
+  description.classList.remove("visible");
+  title.classList.remove("hidden");
+});
+  </script>
+
+</body>
+</html>

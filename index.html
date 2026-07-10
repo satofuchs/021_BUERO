@@ -94,36 +94,30 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 
-  font-size: 13px;
+  font-size: 11px;
   letter-spacing: 0.03em;
 }
 
-.members a {
+.members span {
   color: white;
   text-decoration: none;
 }
 
-.members a:nth-child(1) {
+.members span:nth-child(1) {
   text-align: left;
 }
 
-.members a:nth-child(2),
-.members a:nth-child(3) {
+.members span:nth-child(2),
+.members span:nth-child(3) {
   text-align: center;
 }
 
-.members a:nth-child(4) {
+.members span:nth-child(4) {
   text-align: right;
 }
 
-.members a {
-    color: rgba(255,255,255,0.55);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.members a:hover {
-    color: white;
+.members span {
+  color: rgba(255,255,255,1);
 }
 
     .title.hidden {
@@ -151,9 +145,11 @@
     bottom: 16px;
   }
 
-  .members a {
+@media (max-width: 700px) {
+  .members span {
     text-align: center !important;
   }
+}
 }
   </style>
 </head>
@@ -175,6 +171,13 @@
       </p>
       
         <br>
+        
+        <div class="members">
+  <span>Dario Gemperle</span>
+  <span>Majella Hauri</span>
+  <span>Robin Gemperle</span>
+  <span>Samuel Fuchs</span>
+</div>
 
 <br>
 
@@ -195,87 +198,38 @@
     { type: "image", src: "media/image5.jpg" },
     {
       type: "video",
-      src: "media/video1.mp4"
+      src: "media/video1.mp4",
+      poster: "media/image1.jpg"
     },
     {
       type: "video",
-      src: "media/video2.mp4"
+      src: "media/video2.mp4",
+      poster: "media/image2.jpg"
     }
   ];
 
-  const storageKey = "backgroundOrder-v2";
+  const selected =
+    backgrounds[Math.floor(Math.random() * backgrounds.length)];
 
-  function shuffle(array) {
-    const shuffled = [...array];
-
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-
-    return shuffled;
-  }
-
-  function getNextBackground() {
-    let order;
-
-    try {
-      order = JSON.parse(localStorage.getItem(storageKey) || "[]");
-    } catch {
-      order = [];
-    }
-
-    // Alte oder ungültige gespeicherte Indizes entfernen
-    order = order.filter(
-      index =>
-        Number.isInteger(index) &&
-        index >= 0 &&
-        index < backgrounds.length
-    );
-
-    if (order.length === 0) {
-      order = shuffle(backgrounds.map((_, index) => index));
-    }
-
-    const nextIndex = order.shift();
-
-    localStorage.setItem(storageKey, JSON.stringify(order));
-
-    return backgrounds[nextIndex] || backgrounds[0];
-  }
-
-  const selected = getNextBackground();
   const background = document.getElementById("background");
 
-  function showFallback(src) {
-    background.innerHTML = `
-      <img src="${src}" alt="">
-    `;
-  }
-
   if (selected.type === "image") {
-    showFallback(selected.src);
+    background.innerHTML = `
+      <img src="${selected.src}" alt="">
+    `;
   } else {
-    const video = document.createElement("video");
-
-    video.autoplay = true;
-    video.muted = true;
-    video.loop = true;
-    video.playsInline = true;
-    video.preload = "auto";
-    video.src = selected.src;
-
-    video.addEventListener("error", () => {
-      showFallback(selected.fallback || backgrounds[0].src);
-    });
-
-    video.addEventListener("loadeddata", () => {
-      video.play().catch(() => {
-        showFallback(selected.fallback || backgrounds[0].src);
-      });
-    });
-
-    background.replaceChildren(video);
+    background.innerHTML = `
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        poster="${selected.poster}"
+      >
+        <source src="${selected.src}" type="video/mp4">
+      </video>
+    `;
   }
 
   const title = document.getElementById("title");

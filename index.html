@@ -217,9 +217,31 @@
     { type: "image", src: "media/image3.jpg" },
     { type: "image", src: "media/image4.jpg" },
     { type: "image", src: "media/image5.jpg" },
+    { type: "video", src: "media/video1.mp4" },
+    { type: "video", src: "media/video2.mp4" },
 ];
 
-const random = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+function getNextBackground() {
+  let order = JSON.parse(localStorage.getItem("backgroundOrder") || "[]");
+
+  if (order.length === 0) {
+    order = backgrounds.map((_, index) => index);
+
+    // Fisher-Yates Shuffle
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+  }
+
+  const nextIndex = order.shift();
+
+  localStorage.setItem("backgroundOrder", JSON.stringify(order));
+
+  return backgrounds[nextIndex];
+}
+
+const random = getNextBackground();
 
 const background = document.getElementById("background");
 

@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>021_BUERO</title>
+  <title>021_BUERO — Architecture, Text, Image & Hospitality</title>
   
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=2">
-  
+
+<meta name="description" content="021_BUERO is a collective inquiring the conditions of living together through architecture, text, image and hospitality.">
+
+<meta property="og:title" content="021_BUERO">
+<meta property="og:description" content="Collective inquiring the conditions of living together.">
+<meta property="og:image" content="https://021buero.ch/preview.jpg">
+<meta property="og:url" content="https://021buero.ch">
+<meta property="og:type" content="website">
   
 
   <style>
@@ -135,12 +142,16 @@
 }
 
     @media (max-width: 700px) {
-      .emails {
-        flex-direction: column;
-        align-items: center;
-        bottom: 16px;
-      }
-    }
+  .members {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    bottom: 16px;
+  }
+
+  .members a {
+    text-align: center !important;
+  }
+}
   </style>
 </head>
 
@@ -157,7 +168,7 @@
       </p>
       <br>
       <p>
-        The collective of similar minds plays on transdisplinary fields of action. It balances conception, reflection & operation within spatial practices, text, image & hospitality.
+        The collective of similar minds plays across transdisciplinary fields of action. It balances conception, reflection & operation within spatial practices, text, image & hospitality.
       </p>
       
         <br>
@@ -227,12 +238,10 @@ if (random.type === "image") {
   
 const title = document.getElementById("title");
 const description = document.getElementById("description");
-const members = document.getElementById("members");
 
 title.addEventListener("click", () => {
   title.classList.add("hidden");
   description.classList.add("visible");
-  members.classList.add("visible");
 });
 
 description.addEventListener("click", (event) => {

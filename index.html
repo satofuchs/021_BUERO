@@ -209,73 +209,115 @@
     </div>
   </main>
 
-  <script>
-  
+ <script>
   const backgrounds = [
     { type: "image", src: "media/image1.jpg" },
     { type: "image", src: "media/image2.jpg" },
     { type: "image", src: "media/image3.jpg" },
     { type: "image", src: "media/image4.jpg" },
     { type: "image", src: "media/image5.jpg" },
-    { type: "video", src: "media/video1.mp4" },
-    { type: "video", src: "media/video2.mp4" },
-];
-
-function getNextBackground() {
-  let order = JSON.parse(localStorage.getItem("backgroundOrder") || "[]");
-
-  if (order.length === 0) {
-    order = backgrounds.map((_, index) => index);
-
-    // Fisher-Yates Shuffle
-    for (let i = order.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [order[i], order[j]] = [order[j], order[i]];
+    {
+      type: "video",
+      src: "media/video1.mp4",
+      fallback: "media/image1.jpg"
+    },
+    {
+      type: "video",
+      src: "media/video2.mp4",
+      fallback: "media/image2.jpg"
     }
+  ];
+
+  const storageKey = "backgroundOrder-v2";
+
+  function shuffle(array) {
+    const shuffled = [...array];
+
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    return shuffled;
   }
 
-  const nextIndex = order.shift();
+  function getNextBackground() {
+    let order;
 
-  localStorage.setItem("backgroundOrder", JSON.stringify(order));
+    try {
+      order = JSON.parse(localStorage.getItem(storageKey) || "[]");
+    } catch {
+      order = [];
+    }
 
-  return backgrounds[nextIndex];
-}
+    // Alte oder ungültige gespeicherte Indizes entfernen
+    order = order.filter(
+      index =>
+        Number.isInteger(index) &&
+        index >= 0 &&
+        index < backgrounds.length
+    );
 
-const random = getNextBackground();
+    if (order.length === 0) {
+      order = shuffle(backgrounds.map((_, index) => index));
+    }
 
-const background = document.getElementById("background");
+    const nextIndex = order.shift();
 
-if (random.type === "image") {
+    localStorage.setItem(storageKey, JSON.stringify(order));
 
+    return backgrounds[nextIndex] || backgrounds[0];
+  }
+
+  const selected = getNextBackground();
+  const background = document.getElementById("background");
+
+  function showFallback(src) {
     background.innerHTML = `
-        <img src="${random.src}" alt="">
+      <img src="${src}" alt="">
     `;
+  }
 
-} else {
+  if (selected.type === "image") {
+    showFallback(selected.src);
+  } else {
+    const video = document.createElement("video");
 
-    background.innerHTML = `
-        <video autoplay muted loop playsinline>
-            <source src="${random.src}" type="video/mp4">
-        </video>
-    `;
+    video.autoplay = true;
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.preload = "auto";
+    video.src = selected.src;
 
-}
-  
-const title = document.getElementById("title");
-const description = document.getElementById("description");
+    video.addEventListener("error", () => {
+      showFallback(selected.fallback || backgrounds[0].src);
+    });
 
-title.addEventListener("click", () => {
-  title.classList.add("hidden");
-  description.classList.add("visible");
-});
+    video.addEventListener("loadeddata", () => {
+      video.play().catch(() => {
+        showFallback(selected.fallback || backgrounds[0].src);
+      });
+    });
 
-description.addEventListener("click", (event) => {
-  if (event.target.closest("a")) return;
+    background.replaceChildren(video);
+  }
 
-  description.classList.remove("visible");
-  title.classList.remove("hidden");
-});
-  </script>
+  const title = document.getElementById("title");
+  const description = document.getElementById("description");
+
+  title.addEventListener("click", () => {
+    title.classList.add("hidden");
+    description.classList.add("visible");
+  });
+
+  description.addEventListener("click", event => {
+    if (event.target.closest("a")) return;
+
+    description.classList.remove("visible");
+    title.classList.remove("hidden");
+  });
+</script>
 
 </body>
 </html>

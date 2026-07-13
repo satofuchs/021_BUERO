@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>021_BUERO — Architecture, Text, Image & Hospitality</title>
-  
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=2">
 
-<meta property="og:title" content="021_BUERO">
-<meta property="og:description" content="Collective inquiring the conditions of living together.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://021buero.ch/">
+  <meta
+    name="description"
+    content="021_BUERO is a collective inquiring into the conditions of living together through architecture, text, image and hospitality."
+  >
 
-<meta property="og:image" content="https://021buero.ch/preview.jpg?v=2">
-<meta property="og:image:secure_url" content="https://021buero.ch/preview.jpg?v=2">
-<meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="021_BUERO">
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/favicon.png?v=2"
+  >
+
+  <meta property="og:title" content="021_BUERO">
+  <meta
+    property="og:description"
+    content="Collective inquiring into the conditions of living together."
+  >
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://021buero.ch/">
+  <meta property="og:image" content="https://021buero.ch/preview.jpg?v=2">
+  <meta property="og:image:secure_url" content="https://021buero.ch/preview.jpg?v=2">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="021_BUERO">
 
   <style>
     * {
@@ -26,10 +39,11 @@
       padding: 0;
     }
 
-    html, body {
+    html,
+    body {
       width: 100%;
       height: 100%;
-      font-family: Neue Haas Grotesk, Helvetica, sans-serif;
+      font-family: "Neue Haas Grotesk", Helvetica, Arial, sans-serif;
       color: white;
       overflow: hidden;
       background: black;
@@ -39,10 +53,12 @@
       position: fixed;
       inset: 0;
       z-index: 0;
+      background: black;
     }
 
     .background img,
     .background video {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -67,178 +83,269 @@
       letter-spacing: 0.03em;
       cursor: pointer;
       user-select: none;
-    }
-
-    .description {
-      position: absolute;
-      max-width: 650px;
-      font-size: clamp(16px, 2vw, 22px);
-      line-height: 1.35;
-      opacity: 0;
-      pointer-events: none;
       transition: opacity 0.4s ease;
-      padding: 24px;
     }
-
-    .description.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
- 
-.members {
-  position: fixed;
-  bottom: 24px;
-  left: 24px;
-  right: 24px;
-
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-
-  font-size: 11px;
-  letter-spacing: 0.03em;
-}
-
-.members span {
-  color: white;
-  text-decoration: none;
-}
-
-.members span:nth-child(1) {
-  text-align: left;
-}
-
-.members span:nth-child(2),
-.members span:nth-child(3) {
-  text-align: center;
-}
-
-.members span:nth-child(4) {
-  text-align: right;
-}
-
-.members span {
-  color: rgba(255,255,255,1);
-}
 
     .title.hidden {
       opacity: 0;
       pointer-events: none;
     }
 
-.email {
-  display: inline-block;
-  margin-top: 18px;
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-  letter-spacing: 0.02em;
-}
+    .description {
+      position: absolute;
+      max-width: 650px;
+      padding: 24px;
+      font-size: clamp(16px, 2vw, 22px);
+      line-height: 1.35;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
 
-.email:hover {
-  text-decoration: underline;
-}
+    .description.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .language-switch {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      letter-spacing: 0.03em;
+    }
+
+    .language-switch button {
+      appearance: none;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.55);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .language-switch button:hover,
+    .language-switch button.active {
+      color: white;
+    }
+
+    .members {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      font-size: 11px;
+      letter-spacing: 0.03em;
+    }
+
+    .members span:nth-child(1) {
+      text-align: left;
+    }
+
+    .members span:nth-child(2),
+    .members span:nth-child(3) {
+      text-align: center;
+    }
+
+    .members span:nth-child(4) {
+      text-align: right;
+    }
+
+    .email {
+      display: inline-block;
+      margin-top: 18px;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+    }
+
+    .email:hover {
+      text-decoration: underline;
+    }
 
     @media (max-width: 700px) {
-  .members {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    bottom: 16px;
-  }
+      .language-switch {
+        top: 16px;
+        right: 16px;
+      }
 
-@media (max-width: 700px) {
-  .members span {
-    text-align: center !important;
-  }
-}
-}
+      .members {
+        bottom: 16px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .members span {
+        text-align: center !important;
+      }
+    }
   </style>
 </head>
 
 <body>
+  <div class="background" id="background"></div>
 
-<div class="background" id="background"></div>
+  <div class="language-switch" aria-label="Language selection">
+    <button type="button" data-language="en">EN</button>
+    <span>/</span>
+    <button type="button" data-language="de">DE</button>
+  </div>
 
   <main class="page">
     <h1 class="title" id="title">021_BUERO</h1>
 
     <div class="description" id="description">
-      <p>
-        021_BUERO inquires the conditions of living together.
+      <p id="intro">
+        021_BUERO inquires into the conditions of living together.
       </p>
+
       <br>
-      <p>
-        The collective of similar minds plays across transdisciplinary fields of action. It balances conception, reflection & operation within spatial practices, text, image & hospitality.
+
+      <p id="about">
+        The collective of similar minds plays across transdisciplinary
+        fields of action. It balances conception, reflection and operation
+        within spatial practices, text, image and hospitality.
       </p>
-      
-        <br>
-        
-        <div class="members">
-  <span>Dario Gemperle</span>
-  <span>Majella Hauri</span>
-  <span>Robin Gemperle</span>
-  <span>Samuel Fuchs</span>
-</div>
 
-<br>
+      <a class="email" href="mailto:contact@021buero.ch">
+        contact@021buero.ch
+      </a>
 
-<a class="email" href="mailto:contact@021buero.ch">
-  contact@021buero.ch
-</a>
-         <br>
-    
+      <div class="members">
+        <span>Dario Gemperle</span>
+        <span>Majella Hauri</span>
+        <span>Robin Gemperle</span>
+        <span>Samuel Fuchs</span>
+      </div>
     </div>
   </main>
 
- <script>
-  const backgrounds = [
-    { type: "image", src: "media/image1.jpg" },
-    { type: "image", src: "media/image2.jpg" },
-    { type: "image", src: "media/image3.jpg" },
-    { type: "image", src: "media/image4.jpg" },
-    { type: "image", src: "media/image5.jpg" },
-    { type: "video", src: "media/video1.mp4" },
-    { type: "video", src: "media/video2.mp4" }
-  ];
+  <script>
+    const backgrounds = [
+      { type: "image", src: "media/image1.jpg" },
+      { type: "image", src: "media/image2.jpg" },
+      { type: "image", src: "media/image3.jpg" },
+      { type: "image", src: "media/image4.jpg" },
+      { type: "image", src: "media/image5.jpg" },
+      { type: "video", src: "media/video1.mp4" },
+      { type: "video", src: "media/video2.mp4" }
+    ];
 
-  const selected =
-    backgrounds[Math.floor(Math.random() * backgrounds.length)];
+    const selected =
+      backgrounds[Math.floor(Math.random() * backgrounds.length)];
 
-  const background = document.getElementById("background");
+    const background = document.getElementById("background");
 
-  if (selected.type === "image") {
-    background.innerHTML = `
-      <img src="${selected.src}" alt="">
-    `;
-  } else {
-    background.innerHTML = `
-      <video
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto"
-        poster="${selected.poster}"
-      >
-        <source src="${selected.src}" type="video/mp4">
-      </video>
-    `;
-  }
+    if (selected.type === "image") {
+      background.innerHTML = `
+        <img src="${selected.src}" alt="">
+      `;
+    } else {
+      background.innerHTML = `
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="${selected.src}" type="video/mp4">
+        </video>
+      `;
+    }
 
-  const title = document.getElementById("title");
-  const description = document.getElementById("description");
+    const title = document.getElementById("title");
+    const description = document.getElementById("description");
+    const intro = document.getElementById("intro");
+    const about = document.getElementById("about");
 
-  title.addEventListener("click", () => {
-    title.classList.add("hidden");
-    description.classList.add("visible");
-  });
+    const languageButtons = document.querySelectorAll(
+      ".language-switch button"
+    );
 
-  description.addEventListener("click", event => {
-    if (event.target.closest("a")) return;
+    const descriptionMeta = document.querySelector(
+      'meta[name="description"]'
+    );
 
-    description.classList.remove("visible");
-    title.classList.remove("hidden");
-  });
-</script>
+    const translations = {
+      en: {
+        pageTitle:
+          "021_BUERO — Architecture, Text, Image & Hospitality",
+        intro:
+          "021_BUERO inquires into the conditions of living together.",
+        about:
+          "The collective of similar minds plays across transdisciplinary fields of action. It balances conception, reflection and operation within spatial practices, text, image and hospitality.",
+        description:
+          "021_BUERO is a collective inquiring into the conditions of living together through architecture, text, image and hospitality."
+      },
 
+      de: {
+        pageTitle:
+          "021_BUERO — Architektur, Text, Bild & Gastlichkeit",
+        intro:
+          "021_BUERO untersucht Bedingungen des Zusammenlebens.",
+        about:
+          "Das Kollektiv aus Gleichdenkenden bespielt Aktionsräume in transdisziplinärer Methodik. Im Umgang mit Raum, Text, Bild und Hospitality, balanciert es Konzeption, Reflexion und Operatives.",
+        description:
+          "021_BUERO ist ein Kollektiv, das die Bedingungen des Zusammenlebens durch Architektur, Text, Bild und Gastlichkeit untersucht."
+      }
+    };
+
+    function setLanguage(language) {
+      const translation = translations[language];
+
+      document.documentElement.lang = language;
+      document.title = translation.pageTitle;
+
+      intro.textContent = translation.intro;
+      about.textContent = translation.about;
+
+      if (descriptionMeta) {
+        descriptionMeta.setAttribute(
+          "content",
+          translation.description
+        );
+      }
+
+      languageButtons.forEach(button => {
+        button.classList.toggle(
+          "active",
+          button.dataset.language === language
+        );
+      });
+
+      localStorage.setItem("language", language);
+    }
+
+    languageButtons.forEach(button => {
+      button.addEventListener("click", event => {
+        event.stopPropagation();
+        setLanguage(button.dataset.language);
+      });
+    });
+
+    const savedLanguage = localStorage.getItem("language");
+
+    const browserLanguage =
+      navigator.language.toLowerCase().startsWith("de")
+        ? "de"
+        : "en";
+
+    setLanguage(savedLanguage || browserLanguage);
+
+    title.addEventListener("click", () => {
+      title.classList.add("hidden");
+      description.classList.add("visible");
+    });
+
+    description.addEventListener("click", event => {
+      if (event.target.closest("a")) return;
+
+      description.classList.remove("visible");
+      title.classList.remove("hidden");
+    });
+  </script>
 </body>
 </html>

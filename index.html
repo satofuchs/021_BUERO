@@ -1,352 +1,114 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>021_BUERO — Architecture, Text, Image & Hospitality</title>
-
-  <meta
-    name="description"
-    content="021_BUERO is a collective inquiring into the conditions of living together through architecture, text, image and hospitality."
-  >
-
-  <link
-    rel="icon"
-    type="image/png"
-    sizes="32x32"
-    href="/favicon.png?v=2"
-  >
-
-  <meta property="og:title" content="021_BUERO">
-  <meta
-    property="og:description"
-    content="Collective inquiring into the conditions of living together."
-  >
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://021buero.ch/">
-  <meta property="og:image" content="https://021buero.ch/preview.jpg?v=2">
-  <meta property="og:image:secure_url" content="https://021buero.ch/preview.jpg?v=2">
-  <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="021_BUERO">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      font-family: "Neue Haas Grotesk", Helvetica, Arial, sans-serif;
-      color: white;
-      overflow: hidden;
-      background: black;
-    }
-
-    .background {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      background: black;
-    }
-
-    .background img,
-    .background video {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.75);
-    }
-
-    .page {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 24px;
-    }
-
-    .title {
-      font-size: clamp(42px, 9vw, 140px);
-      font-weight: 400;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      user-select: none;
-      transition: opacity 0.4s ease;
-    }
-
-    .title.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .description {
-      position: absolute;
-      max-width: 650px;
-      padding: 24px;
-      font-size: clamp(16px, 2vw, 22px);
-      line-height: 1.35;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
-
-    .description.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .language-switch {
-      position: fixed;
-      top: 24px;
-      right: 24px;
-      z-index: 3;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 11px;
-      letter-spacing: 0.03em;
-    }
-
-    .language-switch button {
-      appearance: none;
-      border: 0;
-      padding: 0;
-      background: transparent;
-      color: rgba(255, 255, 255, 0.55);
-      font: inherit;
-      cursor: pointer;
-    }
-
-    .language-switch button:hover,
-    .language-switch button.active {
-      color: white;
-    }
-
-    .members {
-      position: fixed;
-      bottom: 24px;
-      left: 24px;
-      right: 24px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      font-size: 11px;
-      letter-spacing: 0.03em;
-    }
-
-    .members span:nth-child(1) {
-      text-align: left;
-    }
-
-    .members span:nth-child(2),
-    .members span:nth-child(3) {
-      text-align: center;
-    }
-
-    .members span:nth-child(4) {
-      text-align: right;
-    }
-
-    .email {
-      display: inline-block;
-      margin-top: 18px;
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      letter-spacing: 0.02em;
-    }
-
-    .email:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 700px) {
-      .language-switch {
-        top: 16px;
-        right: 16px;
-      }
-
-      .members {
-        bottom: 16px;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-
-      .members span {
-        text-align: center !important;
-      }
-    }
-  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="021_BUERO is a collective inquiring into the conditions of living together through architecture, text, image and hospitality." name="description"/>
+<title>021_BUERO — Architecture &amp; Hospitality</title>
+<link href="/favicon.png?v=2" rel="icon" type="image/png"/>
+<meta content="021_BUERO" property="og:title"/>
+<meta content="Collective inquiring into the conditions of living together." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://021buero.ch/" property="og:url"/>
+<meta content="https://021buero.ch/preview.jpg?v=2" property="og:image"/>
+<link rel="stylesheet" href="style.css?v=3"/>
 </head>
-
 <body>
-  <div class="background" id="background"></div>
-
-  <div class="language-switch" aria-label="Language selection">
-    <button type="button" data-language="en">EN</button>
-    <span>/</span>
-    <button type="button" data-language="de">DE</button>
-  </div>
-
-  <main class="page">
-    <h1 class="title" id="title">021_BUERO</h1>
-
-    <div class="description" id="description">
-      <p id="intro">
-        021_BUERO inquires into the conditions of living together.
-      </p>
-
-      <br>
-
-      <p id="about">
-        The collective of similar minds plays across transdisciplinary
-        fields of action. It balances conception, reflection and operation
-        within spatial practices, text, image and hospitality.
-      </p>
-
-      <a class="email" href="mailto:contact@021buero.ch">
-        contact@021buero.ch
-      </a>
-
-      <div class="members">
-        <span>Dario Gemperle</span>
-        <span>Majella Hauri</span>
-        <span>Robin Gemperle</span>
-        <span>Samuel Fuchs</span>
-      </div>
-    </div>
-  </main>
-
-  <script>
-    const backgrounds = [
-      { type: "image", src: "media/image1.jpg" },
-      { type: "image", src: "media/image2.jpg" },
-      { type: "image", src: "media/image3.jpg" },
-      { type: "image", src: "media/image4.jpg" },
-      { type: "image", src: "media/image5.jpg" },
-  	  { type: "image", src: "media/image6.jpg" },
-      { type: "video", src: "media/video1.mp4" },
-      { type: "video", src: "media/video2.mp4" }
-    ];
-
-    const selected =
-      backgrounds[Math.floor(Math.random() * backgrounds.length)];
-
-    const background = document.getElementById("background");
-
-    if (selected.type === "image") {
-      background.innerHTML = `
-        <img src="${selected.src}" alt="">
-      `;
-    } else {
-      background.innerHTML = `
-        <video autoplay muted loop playsinline preload="auto">
-          <source src="${selected.src}" type="video/mp4">
-        </video>
-      `;
-    }
-
-    const title = document.getElementById("title");
-    const description = document.getElementById("description");
-    const intro = document.getElementById("intro");
-    const about = document.getElementById("about");
-
-    const languageButtons = document.querySelectorAll(
-      ".language-switch button"
-    );
-
-    const descriptionMeta = document.querySelector(
-      'meta[name="description"]'
-    );
-
-    const translations = {
-      en: {
-        pageTitle:
-          "021_BUERO — Architecture, Text, Image & Hospitality",
-        intro:
-          "021_BUERO inquires into the conditions of living together.",
-        about:
-          "The collective of similar minds plays across transdisciplinary fields of action. It balances conception, reflection and operation within spatial practices, text, image and hospitality.",
-        description:
-          "021_BUERO is a collective inquiring into the conditions of living together through architecture, text, image and hospitality."
-      },
-
-      de: {
-        pageTitle:
-          "021_BUERO — Architektur, Text, Bild & Gastlichkeit",
-        intro:
-          "021_BUERO untersucht Bedingungen des Zusammenlebens.",
-        about:
-          "Das Kollektiv aus Gleichdenkenden bespielt Aktionsräume in transdisziplinärer Methodik. Im Umgang mit Raum, Text, Bild und Hospitality, balanciert es Konzeption, Reflexion und Operatives.",
-        description:
-          "021_BUERO ist ein Kollektiv, das die Bedingungen des Zusammenlebens durch Architektur, Text, Bild und Gastlichkeit untersucht."
-      }
-    };
-
-    function setLanguage(language) {
-      const translation = translations[language];
-
-      document.documentElement.lang = language;
-      document.title = translation.pageTitle;
-
-      intro.textContent = translation.intro;
-      about.textContent = translation.about;
-
-      if (descriptionMeta) {
-        descriptionMeta.setAttribute(
-          "content",
-          translation.description
-        );
-      }
-
-      languageButtons.forEach(button => {
-        button.classList.toggle(
-          "active",
-          button.dataset.language === language
-        );
-      });
-
-      localStorage.setItem("language", language);
-    }
-
-    languageButtons.forEach(button => {
-      button.addEventListener("click", event => {
-        event.stopPropagation();
-        setLanguage(button.dataset.language);
-      });
-    });
-
-    const savedLanguage = localStorage.getItem("language");
-
-    const browserLanguage =
-      navigator.language.toLowerCase().startsWith("de")
-        ? "de"
-        : "en";
-
-    setLanguage(savedLanguage || browserLanguage);
-
-    title.addEventListener("click", () => {
-      title.classList.add("hidden");
-      description.classList.add("visible");
-    });
-
-    description.addEventListener("click", event => {
-      if (event.target.closest("a")) return;
-
-      description.classList.remove("visible");
-      title.classList.remove("hidden");
-    });
-  </script>
+<nav aria-label="Main navigation" class="site-menu">
+<button aria-controls="menuPanel" aria-expanded="false" class="menu-toggle" id="menuToggle" type="button">021_ +</button>
+<div class="menu-panel" hidden="" id="menuPanel">
+<a href="#opening" id="navHome">021_BUERO</a>
+<div class="menu-item menu-item-journal" id="journalMenuItem">
+<a href="#journal-section" id="navEntries" aria-haspopup="true" aria-expanded="false" aria-controls="journalSubmenu">Journal</a>
+<div class="menu-submenu" id="journalSubmenu">
+<!-- Entries are created automatically from journal.json -->
+</div>
+</div>
+<a href="#about-section" id="navAbout">About / Über uns</a>
+<a href="#contact-section" id="navContact">Contact / Kontakt</a>
+</div>
+</nav>
+<div aria-label="Language selection" class="language-switch">
+<button class="active" data-language="en" type="button">EN</button><span>/</span><button data-language="de" type="button">DE</button>
+</div>
+<section aria-label="021_BUERO introduction" class="opening" id="opening">
+<div class="opening-sticky" id="openingSticky">
+<div class="background" id="background"></div>
+<span aria-label="Bildrechte: 021_BUERO" class="fullbleed-credit">© 021_BUERO</span>
+<h1 class="cover-title" id="coverTitle"><button aria-label="Read about 021_BUERO" id="openIntro" type="button">021_BUERO</button></h1>
+<div class="intro" id="intro" role="button" tabindex="0" aria-label="Return to 021_BUERO">
+<p id="introLine">021_BUERO inquires into the conditions of living together.</p>
+<p id="aboutLine">The collective of similar minds plays across transdisciplinary fields of action. It balances conception, reflection and operation within spatial practices, text, image and hospitality.</p>
+</div>
+</div>
+</section>
+<header aria-label="Journal" class="section-heading" id="journal-section">
+<h2>Journal</h2>
+</header>
+<div id="journal-articles" aria-live="off"></div>
+<header aria-label="About" class="section-heading" id="about-section">
+<h2 id="aboutHeading">About</h2>
+</header>
+<section class="info-section" id="about-content">
+<div class="info-inner">
+<p id="aboutDetail">021_BUERO is a collective working across architecture, text, image and hospitality.</p>
+<div class="people">
+<section class="person">
+<h3>Dario Gemperle</h3>
+<p class="qualification">BSc Hospitality Management / MSc Gastronomic Sciences</p>
+<p class="bio" id="bioDario"></p>
+</section>
+<section class="person">
+<h3>Majella Hauri</h3>
+<p class="qualification" id="qualificationMajella">MSc Architecture ETH</p>
+<p class="bio" id="bioMajella"></p>
+</section>
+<section class="person">
+<h3>Robin Gemperle</h3>
+<p class="qualification" id="qualificationRobin">MSc Architecture ETH</p>
+<p class="bio" id="bioRobin"></p>
+</section>
+<section class="person">
+<h3>Samuel Fuchs</h3>
+<p class="qualification" id="qualificationSamuel">MSc Architecture ETH</p>
+<p class="bio" id="bioSamuel"></p>
+</section>
+</div>
+</div>
+</section>
+<header aria-label="Contact" class="section-heading" id="contact-section">
+<h2 id="contactHeading">Contact</h2>
+</header>
+<section class="info-section" id="contact-content">
+<div class="info-inner">
+<div class="contact-block">
+<p class="contact-name">021_BUERO</p>
+<p>
+  <span id="contactArchitecture">ARCHITEKTUR</span><br/>
+  HOSPITALITY<br/>
+  <span id="contactProduction">PRODUKTION</span>
+</p>
+</div>
+<div class="contact-block">
+<p class="contact-name">034_BAKERY</p>
+<p class="bakery-hours" id="bakeryHours">Mi–Sa 08:00 – Ausverkauft</p>
+<p>
+  <span id="contactSourdough">SAUERTEIG</span><br/>
+  SANDWICHES<br/>
+  <span id="contactCoffee">KAFFEE</span>
+</p>
+</div>
+<p>Laurenzentorgasse 7<br/>5000 Aarau<br/>Switzerland</p>
+<p><a href="mailto:contact@021buero.ch">contact@021buero.ch</a></p>
+<p>Instagram: <a href="https://www.instagram.com/021_buero/" rel="noopener noreferrer" target="_blank">021_buero</a></p>
+</div>
+</section>
+<footer class="legal-footer">
+  <span>© 021_BUERO</span>
+  <a href="impressum.html">Impressum</a>
+  <a href="datenschutz.html">Datenschutz / Privacy</a>
+</footer>
+<script src="script.js" defer></script>
 </body>
 </html>

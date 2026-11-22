@@ -134,9 +134,8 @@ if ("scrollRestoration" in history) {
         }
         const caption = line.match(/^\*(.+)\*$/);
         if (caption && lastFigure) {
-          const figcaption = document.createElement("figcaption");
-          figcaption.textContent = caption[1];
-          lastFigure.append(figcaption); lastFigure = null;
+          // Captions in existing Markdown are intentionally not displayed.
+          lastFigure = null;
           continue;
         }
         if (line.startsWith("# ")) { flushParagraph(); continue; }

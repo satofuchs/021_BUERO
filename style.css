@@ -51,31 +51,32 @@ button { font: inherit; }
 /* Bildnachweis auf dem Startbild. */
 .fullbleed-credit { position: absolute; right: 20px; bottom: 16px; z-index: 5; color: #fff; font: 11px/1.3 var(--font); text-shadow: 0 1px 4px rgba(0,0,0,.55); pointer-events: none; }
 
-/* Journalartikel: Times New Roman, Bilder und Bildunterschriften in gleicher Spaltenbreite. */
+/* Journalartikel: reduzierte Typografie und Bildnachweis direkt auf dem Bild. */
 .article { min-height: 80svh; padding: clamp(40px,8vw,120px) 24px; background: #fff; color: #111; }
 .article-inner, .info-inner { width: min(100%,var(--content-width)); margin-inline: auto; text-align: left; }
-.article h3 { margin: 0 0 1.35em; font-size: var(--text-size); font-weight: 700; line-height: 1.48; text-transform: uppercase; }
-.article-date { display: block; margin: -1.1em 0 2.5em; font-size: var(--small-size); line-height: 1.4; font-weight: 400; }
-.journal-body > p { margin: 0 0 1.25em; font-family: "Times New Roman", Times, serif; font-size: clamp(19px,2vw,23px); line-height: 1.48; font-weight: 400; }
-.article-figure { width: 100%; margin: 2.3em 0; }
+.article h3 { margin: 0; font-size: var(--text-size); font-weight: 400; line-height: 1.4; text-transform: uppercase; }
+.article-date { display: block; margin: 0 0 2.5em; font-family: "Times New Roman", Times, serif; font-size: clamp(17px, 1.65vw, 19px); line-height: 1.48; font-weight: 400; }
+.journal-body > p { margin: 0 0 1.25em; font-family: "Times New Roman", Times, serif; font-size: clamp(17px, 1.65vw, 19px); line-height: 1.48; font-weight: 400; }
+.article-figure { position: relative; width: 100%; margin: 2.3em 0; }
 .article-figure img { display: block; width: 100%; height: auto; }
-.article-figure figcaption { margin-top: 9px; color: #555; font: 12px/1.45 var(--font); }
+.article-figure figcaption { display: none; }
 
 /* About und Contact. */
 .info-section { padding: 85px 24px; background: #fff; color: #111; }
 .section-heading + .info-section { border-top: 0; padding-top: 28px; }
 .info-inner p { margin: 0 0 1.3em; font-size: var(--text-size); line-height: 1.48; }
 .info-inner a { color: inherit; text-underline-offset: 3px; }
-.people { display: flex; flex-direction: column; gap: 42px; margin-top: 40px; }
-.person h3, .person .qualification, .person .bio { font-size: clamp(14px,1.15vw,16px); line-height: 1.5; letter-spacing: 0; }
-.person h3 { margin: 0 0 .2em; font-weight: 700; }
+.people { display: flex; flex-direction: column; gap: 0; margin-top: 40px; }
+.person .qualification, .person .bio { font-family: var(--font); font-size: var(--text-size); line-height: 1.5; letter-spacing: 0; }
 .person .qualification { margin: 0 0 .7em; }
 .person .bio { margin: 0; }
 #contact-content a[href*="instagram.com"] { text-decoration: underline; text-underline-offset: 2px; }
 .contact-block { margin-bottom: 2.8em; }
 .contact-block p { margin: 0; }
 .contact-block .contact-name { font-weight: 700; }
-.contact-block .bakery-hours { font-size: clamp(14px,1.15vw,16px); font-weight: 700; margin-bottom: 0; }
+.contact-block .bakery-hours { font-family: var(--font); font-size: 12px; font-weight: 300; line-height: 1.4; margin: 0; }
+.bakery-heading { display: flex; align-items: baseline; justify-content: flex-start; gap: 24px; flex-wrap: wrap; }
+.bakery-heading .contact-name { margin: 0; }
 .contact-block .contact-name + p:not(.bakery-hours) { margin-top: 0; }
 
 
@@ -166,4 +167,16 @@ footer.legal-footer a:hover {
     gap: 8px 14px;
     font-size: 11px;
   }
+}
+/* Team: names share the introductory text size; biographies expand on tap. */
+.person { margin: 0; }
+.person summary { display: block; width: fit-content; cursor: pointer; font-family: var(--font); font-size: var(--text-size); font-weight: 400; line-height: 1.48; list-style: none; text-decoration: underline; text-underline-offset: 3px; }
+.person summary::-webkit-details-marker { display: none; }
+.person summary::marker { content: ""; }
+.person summary:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
+.person + .person { margin-top: .25em; }
+.person-details { padding: 10px 0 20px; max-width: var(--content-width); }
+.person-details .qualification { margin: 0 0 .7em; }
+.person-details .bio { margin: 0; }
+@media (max-width: 700px) {
 }

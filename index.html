@@ -12,7 +12,7 @@
 <meta content="website" property="og:type"/>
 <meta content="https://021buero.ch/" property="og:url"/>
 <meta content="https://021buero.ch/preview.jpg?v=2" property="og:image"/>
-<link rel="stylesheet" href="style.css?v=3"/>
+<link rel="stylesheet" href="style.css?v=6"/>
 </head>
 <body>
 <nav aria-label="Main navigation" class="site-menu">
@@ -54,26 +54,26 @@
 <div class="info-inner">
 <p id="aboutDetail">021_BUERO is a collective working across architecture, text, image and hospitality.</p>
 <div class="people">
-<section class="person">
-<h3>Dario Gemperle</h3>
-<p class="qualification">BSc Hospitality Management / MSc Gastronomic Sciences</p>
-<p class="bio" id="bioDario"></p>
-</section>
-<section class="person">
-<h3>Majella Hauri</h3>
-<p class="qualification" id="qualificationMajella">MSc Architecture ETH</p>
-<p class="bio" id="bioMajella"></p>
-</section>
-<section class="person">
-<h3>Robin Gemperle</h3>
-<p class="qualification" id="qualificationRobin">MSc Architecture ETH</p>
-<p class="bio" id="bioRobin"></p>
-</section>
-<section class="person">
-<h3>Samuel Fuchs</h3>
-<p class="qualification" id="qualificationSamuel">MSc Architecture ETH</p>
-<p class="bio" id="bioSamuel"></p>
-</section>
+<details class="person">
+<summary>Dario Gemperle</summary>
+<div class="person-details"><p class="qualification">BSc Hospitality Management / MSc Gastronomic Sciences</p>
+<p class="bio" id="bioDario"></p></div>
+</details>
+<details class="person">
+<summary>Majella Hauri</summary>
+<div class="person-details"><p class="qualification" id="qualificationMajella">MSc Architecture ETH</p>
+<p class="bio" id="bioMajella"></p></div>
+</details>
+<details class="person">
+<summary>Robin Gemperle</summary>
+<div class="person-details"><p class="qualification" id="qualificationRobin">MSc Architecture ETH</p>
+<p class="bio" id="bioRobin"></p></div>
+</details>
+<details class="person">
+<summary>Samuel Fuchs</summary>
+<div class="person-details"><p class="qualification" id="qualificationSamuel">MSc Architecture ETH</p>
+<p class="bio" id="bioSamuel"></p></div>
+</details>
 </div>
 </div>
 </section>
@@ -91,8 +91,10 @@
 </p>
 </div>
 <div class="contact-block">
-<p class="contact-name">034_BAKERY</p>
-<p class="bakery-hours" id="bakeryHours">Mi–Sa 08:00 – Ausverkauft</p>
+<div class="bakery-heading">
+  <p class="contact-name">034_BAKERY</p>
+  <p class="bakery-hours" id="bakeryHours">Mi–Sa 08:00 – Ausverkauft</p>
+</div>
 <p>
   <span id="contactSourdough">SAUERTEIG</span><br/>
   SANDWICHES<br/>
@@ -109,6 +111,6 @@
   <a href="impressum.html">Impressum</a>
   <a href="datenschutz.html">Datenschutz / Privacy</a>
 </footer>
-<script src="script.js" defer></script>
+<script src="script.js?v=5" defer></script>
 </body>
 </html>

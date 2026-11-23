@@ -9,7 +9,6 @@ if ("scrollRestoration" in history) {
       { type: "image", src: "media/image3.jpg" },
       { type: "image", src: "media/image4.jpg" },
       { type: "image", src: "media/image5.jpg" },
-      { type: "image", src: "media/image6.jpg" },
       { type: "image", src: "media/image7.jpg" },
       { type: "video", src: "media/video1.mp4" }
     ];
